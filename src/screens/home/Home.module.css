@@ -1,0 +1,8 @@
+.premium_banner {
+  background: rgb(9, 9, 121);
+  background: linear-gradient(
+    90deg,
+    rgba(9, 9, 121, 1) 0%,
+    rgba(123, 0, 255, 1) 100%
+  );
+}
