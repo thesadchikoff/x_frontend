@@ -1,4 +1,3 @@
-import Premium from "@/assets/premium.svg";
 import { ROUTES } from "@/constants";
 import { useUser } from "@/contexts";
 import { Settings2 } from "lucide-react";
@@ -6,10 +5,13 @@ import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import styles from "./Profile.module.scss";
 import { AvatarPremium } from "@/components/avatar-premium/AvatarPremium";
+import Status from "@/assets/status.gif";
+import { ContextStatus } from "@/components/context-status/ContextStatus";
+import { useState } from "react";
 
 export const Profile = () => {
   const { user } = useUser();
-
+  const [isOpenContext, setIsOpenContext] = useState(false);
   return (
     <div className="flex-1 py-10 bg-primary-50">
       <div className="container flex flex-col gap-10">
@@ -37,6 +39,17 @@ export const Profile = () => {
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-4">
                     <span className="font-medium">{user?.email}</span>
+                    <div className="relative">
+                      <img
+                        src={Status}
+                        alt=""
+                        width={20}
+                        height={30}
+                        className="rounded-full"
+                        onClick={() => setIsOpenContext(!isOpenContext)}
+                      />
+                      {isOpenContext && <ContextStatus />}
+                    </div>
                   </div>
                   {user?.login && (
                     <span className="text-xs font-medium !opacity-50">

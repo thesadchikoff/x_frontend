@@ -6,10 +6,13 @@ import userService from "@/services/user/user.service";
 import { Link, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 import Logout from "@/assets/logout.svg";
+import styles from "./Header.module.scss";
+import { cn } from "@/utils/helpers";
 
 export const Header = () => {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
+
   const logoutHandler = () => {
     userService.logout();
     setUser(null);
@@ -25,6 +28,14 @@ export const Header = () => {
           {user?.is_premium && <sup className="font-bold text-brand">Pro</sup>}
         </Link>
         <div className="flex items-center gap-4">
+          {!user?.is_premium && (
+            <div className={styles.premium_root}>
+              <span className={cn("font-semibold", styles.premium_badge)}>
+                Get Premium
+              </span>
+            </div>
+          )}
+
           <Link to={ROUTES.PROFILE}>
             <span className="px-4 py-1 font-medium border text-slate-700 rounded-xl mobile:hidden tablet:block bg-primary-50">
               {user?.login ? user.login : user?.email}
@@ -40,12 +51,6 @@ export const Header = () => {
             height={25}
             className="transition-all delay-100 cursor-pointer hover:drop-shadow"
           />
-          {/* <Button
-            onClick={logoutHandler}
-            title="Выйти"
-            size="xs"
-            variant="ghost"
-          /> */}
         </div>
       </div>
     </header>

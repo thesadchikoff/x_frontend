@@ -24,7 +24,7 @@ function App() {
       setUser(null);
     },
     retry: false,
-    refetchOnWindowFocus: false,
+    refetchOnWindowFocus: true,
     refetchOnMount: false,
     refetchOnReconnect: false,
   });

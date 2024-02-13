@@ -2,6 +2,7 @@ import { useUploadUserAvatar } from "@/hooks/queries/useUploadUserAvatar";
 import { useRef, useState } from "react";
 import Avatar from "react-avatar";
 import Button from "../button/Button";
+import { toast } from "sonner";
 
 export const UploadAvatar = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -22,7 +23,9 @@ export const UploadAvatar = () => {
         setFileName(fileName);
         setFile(fileData);
       } else {
-        alert("Пожалуйста, выберите изображение в форматах PNG, JPG или JPEG.");
+        toast.warning(
+          "Пожалуйста, выберите изображение в форматах PNG, JPG или JPEG."
+        );
         // Сбросить значение инпута
         if (fileInputRef.current) {
           fileInputRef.current.value = "";
@@ -70,7 +73,7 @@ export const UploadAvatar = () => {
       />
       {previewUrl ? (
         <div className="flex items-center gap-5">
-          <Avatar src={previewUrl} round />
+          <Avatar src={previewUrl} round className="object-cover" />
           <div className="flex flex-col justify-between gap-5">
             <span className="p-3 border rounded-xl ">
               {fileName && fileName}
