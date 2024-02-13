@@ -1,0 +1,20 @@
+.image {
+  width: 100%;
+  height: 100%;
+  background-image: url("/image/banner_icon.png");
+}
+
+.premium_root {
+  cursor: pointer;
+  border-radius: 0.5rem;
+  padding: 0.3rem 1rem;
+  &:hover {
+    background: rgba(155, 118, 255, 0.19);
+  }
+  .premium_badge {
+    background: linear-gradient(225deg, rgb(81, 195, 255), rgb(170, 82, 255));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
