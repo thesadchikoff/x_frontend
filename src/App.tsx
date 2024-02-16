@@ -2,18 +2,14 @@ import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { Toaster } from "sonner";
 import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { QUERYE_KEYS, ROUTES } from "./constants";
+import { QUERYE_KEYS } from "./constants";
 import { UserProvider } from "./contexts";
 import { LoadingScreen } from "./screens/loading/LoadingScreen";
 import userService from "./services/user/user.service";
 import { OnlyAuth, OnlyUnAuth } from "./hoc/ProtectedRouter";
-import HomeScreen from "./screens/home/HomeScreen";
-import { Profile } from "./screens/profile/Profile";
-import { SettingsScreen } from "./screens/settings/SettingsScreen";
-import LoginScreen from "./screens/auth/LoginScreen";
-import RegisterScreen from "./screens/auth/RegisterScreen";
 import { PrivateLayout, PublicLayout } from "./layouts";
 import { RouterList } from "./router/router-list";
+import { ErrorScreen } from "./screens/error/ErrorScreen";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -50,6 +46,7 @@ function App() {
                   <Route
                     key={route.path}
                     path={route.path}
+                    errorElement={<ErrorScreen />}
                     element={
                       <OnlyAuth
                         component={
@@ -66,6 +63,7 @@ function App() {
                 <Route
                   key={route.path}
                   path={route.path}
+                  errorElement={<ErrorScreen />}
                   element={
                     <OnlyUnAuth
                       component={

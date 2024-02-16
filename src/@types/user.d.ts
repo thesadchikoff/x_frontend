@@ -4,6 +4,14 @@ type User = {
   login: string;
   avatar_url: string;
   is_premium: boolean;
+  status?: Status;
+};
+
+type Status = {
+  id: string;
+  created_at: string;
+  pack_id: string;
+  path: string;
 };
 
 type AuthResponse = {

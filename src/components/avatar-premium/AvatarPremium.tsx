@@ -17,7 +17,7 @@ export const AvatarPremium = ({ user }: AvatarPremiumProps) => {
           size="50"
           email={user?.email}
           round
-          src={user?.avatar_url}
+          src={import.meta.env.VITE_API_URL + "/" + user?.avatar_url}
           className={styles.avatar}
         />
       </div>

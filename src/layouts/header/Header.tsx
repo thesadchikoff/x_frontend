@@ -1,4 +1,3 @@
-import Gem from "@/assets/gem.png";
 import ProfileIcon from "@/assets/profile.svg";
 import { ROUTES } from "@/constants";
 import { useUser } from "@/contexts";
@@ -23,9 +22,10 @@ export const Header = () => {
     <header className=" w-full min-h-[70px] border-b">
       <div className="container flex items-center justify-between h-full">
         <Link to={ROUTES.HOME} className="flex items-center gap-1">
-          <img src={Gem} width={50} height={50} alt="" />
           <span>Task Manager</span>
-          {user?.is_premium && <sup className="font-bold text-brand">Pro</sup>}
+          {user?.is_premium && (
+            <sup className="font-bold text-brand">Premium</sup>
+          )}
         </Link>
         <div className="flex items-center gap-4">
           {!user?.is_premium && (
