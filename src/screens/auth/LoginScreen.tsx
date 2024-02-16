@@ -2,6 +2,8 @@ import Coin from "@/assets/gem.png";
 import Button from "@/components/button/Button";
 import { Input } from "@/components/input/Input";
 import { useAuthMutation } from "@/hooks/queries/useAuthMutation";
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { cn } from "@/utils/helpers";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -19,9 +21,14 @@ const LoginScreen = () => {
   const loginSubmit = handleSubmit(({ email, password }) => {
     mutate({ email, password });
   });
-
+  const { theme } = useThemeContext();
   return (
-    <div className="flex flex-col items-center justify-center flex-1 gap-10 bg-primary-50">
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center flex-1 gap-10 bg-primary-50",
+        { "bg-dark": theme === "dark" }
+      )}
+    >
       <img src={Coin} width={200} height={200} />
       <h1 className="text-lg font-semibold">Вход в систему</h1>
       <form className="flex flex-col gap-5 w-[300px]" onSubmit={loginSubmit}>
@@ -65,7 +72,11 @@ const LoginScreen = () => {
           icon={isPending && <Loader2 className="animate-spin" />}
         />
 
-        <span className="text-xs text-center text-secondary">
+        <span
+          className={cn("text-xs text-center text-secondary", {
+            "text-indicator-medium": theme === "dark",
+          })}
+        >
           Нет аккаунта?{" "}
           <Link className="font-semibold text-brand" to={"/register"}>
             Зарегистрируйся

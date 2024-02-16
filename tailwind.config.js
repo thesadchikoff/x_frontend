@@ -1,8 +1,15 @@
 /* eslint-disable no-undef */
 /** @type {import('tailwindcss').Config} */
 export default {
+  darkMode: "class",
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
+    dark: {
+      primary: "black",
+    },
+    light: {
+      primary: "#ffffff",
+    },
     screens: {
       mobile: "300px",
       tablet: "768px",
@@ -65,6 +72,10 @@ export default {
         },
       },
       backgroundColor: {
+        dark: {
+          DEFAULT: "#000000",
+          foreground: "#0E0E0E",
+        },
         danger: {
           DEFAULT: "#FF3939",
           hover: "#FF4F4F",
@@ -88,6 +99,7 @@ export default {
         extralight: "#E3E5E5",
         light: "#CED2DA",
         medium: "#97A1AF",
+        dark: "#212121",
       },
       outlineColor: {
         extralight: "#E3E5E5",

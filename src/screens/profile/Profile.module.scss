@@ -1,0 +1,11 @@
+.dark {
+  @apply bg-dark flex flex-1 flex-col;
+}
+
+.light {
+  @apply dark:bg-primary-50 flex flex-1 flex-col;
+}
+
+.profile_info {
+  @apply flex items-center justify-between p-5  shadow-sm bg-indicator-white rounded-xl bg-dark-foreground;
+}

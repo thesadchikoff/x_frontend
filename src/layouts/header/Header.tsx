@@ -7,11 +7,13 @@ import { toast } from "sonner";
 import Logout from "@/assets/logout.svg";
 import styles from "./Header.module.scss";
 import { cn } from "@/utils/helpers";
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { Sun, SunMoon } from "lucide-react";
 
 export const Header = () => {
   const { user, setUser } = useUser();
   const navigate = useNavigate();
-
+  const { theme, toggleTheme } = useThemeContext();
   const logoutHandler = () => {
     userService.logout();
     setUser(null);
@@ -19,7 +21,11 @@ export const Header = () => {
     navigate(ROUTES.LOGIN);
   };
   return (
-    <header className=" w-full min-h-[70px] border-b">
+    <header
+      className={cn(" w-full min-h-[70px] border-b", {
+        "border-b-dark": theme === "dark",
+      })}
+    >
       <div className="container flex items-center justify-between h-full">
         <Link to={ROUTES.HOME} className="flex items-center gap-1">
           <span>Task Manager</span>
@@ -35,9 +41,20 @@ export const Header = () => {
               </span>
             </div>
           )}
-
+          <div className="cursor-pointer" onClick={toggleTheme}>
+            {theme === "dark" ? <SunMoon /> : <Sun />}
+          </div>
           <Link to={ROUTES.PROFILE}>
-            <span className="px-4 py-1 font-medium border text-slate-700 rounded-xl mobile:hidden tablet:block bg-primary-50">
+            <span
+              className={cn(
+                "px-4 py-1  border text-slate-700  rounded-xl mobile:hidden tablet:block",
+                {
+                  "bg-primary-50": theme === "light",
+                  "bg-dark-foreground border-dark text-indicator-light":
+                    theme === "dark",
+                }
+              )}
+            >
               {user?.login ? user.login : user?.email}
             </span>
           </Link>

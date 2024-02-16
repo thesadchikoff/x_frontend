@@ -1,8 +1,19 @@
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { cn } from "@/utils/helpers";
+
 const HomeScreen = () => {
+  const { theme } = useThemeContext();
   return (
-    <div className="flex-1 max-w-full py-10 bg-primary-50">
+    <div className="h-full py-10 ">
       <div className="container flex flex-col gap-10">
-        <div className="relative flex flex-col justify-center w-full gap-5 p-5 bg-white border rounded-xl">
+        <div
+          className={cn(
+            "relative flex flex-col justify-center w-full gap-5 p-5 bg-white border rounded-xl",
+            {
+              "bg-dark-foreground border-dark": theme === "dark",
+            }
+          )}
+        >
           <h1 className="font-medium mobile:text-md tablet:text-xl">
             Освой своё время: Задачи становятся возможностями
           </h1>

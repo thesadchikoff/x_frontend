@@ -10,13 +10,13 @@ import { OnlyAuth, OnlyUnAuth } from "./hoc/ProtectedRouter";
 import { PrivateLayout, PublicLayout } from "./layouts";
 import { RouterList } from "./router/router-list";
 import { ErrorScreen } from "./screens/error/ErrorScreen";
+import { ThemeProvider } from "./providers/ThemeProvider";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
   const { data, isError, isLoading, isSuccess } = useQuery({
     queryKey: [QUERYE_KEYS.GET_PROFILE],
     queryFn: userService.profile,
-
     retry: false,
     refetchOnWindowFocus: true,
     refetchOnMount: false,
@@ -38,46 +38,48 @@ function App() {
     <>
       <UserProvider user={user} setUser={setUser}>
         <Toaster richColors />
-        <BrowserRouter>
-          <Routes>
-            {RouterList.map((route) => {
-              if (route.isProtected) {
+        <ThemeProvider>
+          <BrowserRouter>
+            <Routes>
+              {RouterList.map((route) => {
+                if (route.isProtected) {
+                  return (
+                    <Route
+                      key={route.path}
+                      path={route.path}
+                      errorElement={<ErrorScreen />}
+                      element={
+                        <OnlyAuth
+                          component={
+                            <PrivateLayout>
+                              <route.component />
+                            </PrivateLayout>
+                          }
+                        />
+                      }
+                    />
+                  );
+                }
                 return (
                   <Route
                     key={route.path}
                     path={route.path}
                     errorElement={<ErrorScreen />}
                     element={
-                      <OnlyAuth
+                      <OnlyUnAuth
                         component={
-                          <PrivateLayout>
+                          <PublicLayout>
                             <route.component />
-                          </PrivateLayout>
+                          </PublicLayout>
                         }
                       />
                     }
                   />
                 );
-              }
-              return (
-                <Route
-                  key={route.path}
-                  path={route.path}
-                  errorElement={<ErrorScreen />}
-                  element={
-                    <OnlyUnAuth
-                      component={
-                        <PublicLayout>
-                          <route.component />
-                        </PublicLayout>
-                      }
-                    />
-                  }
-                />
-              );
-            })}
-          </Routes>
-        </BrowserRouter>
+              })}
+            </Routes>
+          </BrowserRouter>
+        </ThemeProvider>
       </UserProvider>
     </>
   );

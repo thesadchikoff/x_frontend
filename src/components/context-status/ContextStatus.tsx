@@ -1,12 +1,14 @@
-import Status from "@/assets/status.gif";
 import { Loader2 } from "lucide-react";
 import { useEffect, useRef, useState } from "react";
 import styles from "./ContextStatus.module.scss";
 import { useStatusPackQuery } from "@/hooks/queries/useStatusPackQuery";
 import { useIconsQuery } from "@/hooks/queries/useIconQuery";
 import { usePatchIcon } from "@/hooks/queries/usePatchIcon";
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { cn } from "@/utils/helpers";
 
 export const ContextStatus = () => {
+  const { theme } = useThemeContext();
   const containerRef = useRef(null);
   const { data, isLoading, isError, isSuccess } = useStatusPackQuery();
 
@@ -36,6 +38,14 @@ export const ContextStatus = () => {
       return (
         <div className="flex items-center justify-center w-full h-full">
           <span>Ошибка загрузки иконок [{error.message}]</span>
+        </div>
+      );
+    }
+
+    if (isSuccess && !data) {
+      return (
+        <div>
+          <span>Иконки не найдены</span>
         </div>
       );
     }
@@ -84,12 +94,10 @@ export const ContextStatus = () => {
                   setActivePackId(pack.id);
                 }}
                 key={pack.id}
-                className="rounded-full cursor-pointer"
+                className="w-[30px] h-[30px] object-contain cursor-pointer"
                 src={import.meta.env.VITE_API_URL + "/" + pack.preview}
                 alt={pack.name}
                 title={pack.name}
-                width={24}
-                height={24}
               />
             );
           })}
@@ -103,7 +111,12 @@ export const ContextStatus = () => {
     }
   }, [isSuccess, data]);
   return (
-    <div className={styles.status_context_menu} onWheel={handleWheelScroll}>
+    <div
+      className={cn(styles.status_context_menu, {
+        "bg-dark-foreground border-dark": theme === "dark",
+      })}
+      onWheel={handleWheelScroll}
+    >
       {/* <header className={styles.header}>
 				<span className={styles.title}>Выберите статус</span>
 			</header> */}
@@ -112,7 +125,9 @@ export const ContextStatus = () => {
       </div>
       <div
         onWheel={handleWheelScroll}
-        className={styles.footer}
+        className={cn(styles.footer, {
+          "border-dark": theme === "dark",
+        })}
         ref={containerRef}
       >
         <GetPack />

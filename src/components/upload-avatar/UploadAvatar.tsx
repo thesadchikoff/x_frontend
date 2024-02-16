@@ -3,6 +3,8 @@ import { useRef, useState } from "react";
 import Avatar from "react-avatar";
 import Button from "../button/Button";
 import { toast } from "sonner";
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { cn } from "@/utils/helpers";
 
 export const UploadAvatar = () => {
   const fileInputRef = useRef<HTMLInputElement>(null);
@@ -10,7 +12,7 @@ export const UploadAvatar = () => {
   const [fileName, setFileName] = useState<string>("");
   const [file, setFile] = useState<File | null>(null); // Уточнил тип данных
   const { mutate } = useUploadUserAvatar();
-
+  const { theme } = useThemeContext();
   const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const file = event.target.files?.[0];
     if (file) {
@@ -75,7 +77,11 @@ export const UploadAvatar = () => {
         <div className="flex items-center gap-5">
           <Avatar src={previewUrl} round className="object-cover" />
           <div className="flex flex-col justify-between gap-5">
-            <span className="p-3 border rounded-xl ">
+            <span
+              className={cn("p-3 border rounded-xl", {
+                "border-dark": theme === "dark",
+              })}
+            >
               {fileName && fileName}
             </span>
             <div className="flex items-center gap-3">

@@ -2,6 +2,8 @@ import Strike from "@/assets/strike.png";
 import Button from "@/components/button/Button";
 import { Input } from "@/components/input/Input";
 import { useRegisterMutation } from "@/hooks/queries/useRegisterMutation";
+import { useThemeContext } from "@/hooks/useThemeContext";
+import { cn } from "@/utils/helpers";
 import { Loader2 } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { Link } from "react-router-dom";
@@ -18,8 +20,16 @@ const RegisterScreen = () => {
   const registerSubmit = handleSubmit(({ email, password }) => {
     mutate({ email, password });
   });
+  const { theme } = useThemeContext();
   return (
-    <div className="flex flex-col items-center justify-center flex-1 gap-10 bg-primary-50">
+    <div
+      className={cn(
+        "flex flex-col items-center justify-center flex-1 gap-10 bg-primary-50",
+        {
+          "bg-dark": theme === "dark",
+        }
+      )}
+    >
       <img src={Strike} width={300} height={300} />
       <h1 className="text-lg font-semibold">Регистрация в системе</h1>
       <form onSubmit={registerSubmit} className="flex flex-col gap-5 w-[300px]">
@@ -66,7 +76,11 @@ const RegisterScreen = () => {
           size="md"
           icon={isPending && <Loader2 className="animate-spin" />}
         />
-        <span className="text-xs text-center text-secondary">
+        <span
+          className={cn("text-xs text-center text-secondary", {
+            "text-indicator-medium": theme === "dark",
+          })}
+        >
           Уже есть аккаунт?{" "}
           <Link className="font-semibold text-brand" to={"/login"}>
             Авторизуйся
