@@ -4,6 +4,19 @@
   background-image: url("/image/banner_icon.png");
 }
 
+.premium_badge_sup {
+  background: linear-gradient(225deg, rgb(71, 110, 255), rgb(12, 4, 247));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+
+  font-size: 0.88rem;
+  font-weight: 500;
+  line-height: 1.06rem;
+  letter-spacing: 0rem;
+}
+
 .premium_root {
   cursor: pointer;
   border-radius: 0.5rem;

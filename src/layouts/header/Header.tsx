@@ -30,7 +30,7 @@ export const Header = () => {
         <Link to={ROUTES.HOME} className="flex items-center gap-1">
           <span>Task Manager</span>
           {user?.is_premium && (
-            <sup className="font-bold text-brand">Premium</sup>
+            <sup className={styles.premium_badge_sup}>Premium</sup>
           )}
         </Link>
         <div className="flex items-center gap-4">
@@ -41,7 +41,10 @@ export const Header = () => {
               </span>
             </div>
           )}
-          <div className="cursor-pointer" onClick={toggleTheme}>
+          <div
+            className="cursor-pointer text-brand-accent"
+            onClick={toggleTheme}
+          >
             {theme === "dark" ? <SunMoon /> : <Sun />}
           </div>
           <Link to={ROUTES.PROFILE}>

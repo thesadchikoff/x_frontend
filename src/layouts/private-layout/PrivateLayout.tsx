@@ -9,7 +9,7 @@ export const PrivateLayout = ({ children }: PrivateLayoutProps) => {
     <div className="flex flex-col w-full h-full">
       <Header />
       <main
-        className={cn("flex-col flex-1 w-full h-full py-5", {
+        className={cn("flex flex-col flex-1 w-full  py-5", {
           "dark:bg-dark": theme === "dark",
           "bg-primary-50 ": theme === "light",
         })}

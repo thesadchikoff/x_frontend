@@ -38,6 +38,7 @@ export default {
           400: "#4c94ff",
           500: "#1975ff",
           700: "#0052cc",
+          800: "#0136FF",
         },
         indicator: {
           focused: {
@@ -69,6 +70,7 @@ export default {
           DEFAULT: "#1975ff",
           hover: "#0052CC",
           disabled: "#cce0ff",
+          accent: "#0136FF",
         },
       },
       backgroundColor: {

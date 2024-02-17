@@ -3,22 +3,22 @@ import { PremiumBadge } from "@/components/premium-badge/PremiumBadge";
 import { ROUTES } from "@/constants";
 import { useUser } from "@/contexts";
 import { Settings2 } from "lucide-react";
-import Avatar from "react-avatar";
 import { Link } from "react-router-dom";
 import styles from "./Profile.module.scss";
 import ErrorBoundary from "@/components/error/ErrorBoundary";
 import { useThemeContext } from "@/hooks/useThemeContext";
-import clsx from "clsx";
 import { cn } from "@/utils/helpers";
+import { StatisticWidget } from "@/components/statistic-widget/StatisticWidget";
 
 export const Profile = () => {
   const { user } = useUser();
   const { theme } = useThemeContext();
+
   return (
     <div
-      className={clsx({
-        [styles.dark]: theme === "dark",
-        [styles.light]: theme === "light",
+      className={cn("flex flex-1  w-full h-full", {
+        "bg-dark": theme === "dark",
+        "bg-primary-50": theme === "light",
       })}
     >
       <div className="container flex flex-col gap-10">
@@ -32,21 +32,7 @@ export const Profile = () => {
           <div className="flex items-center gap-5">
             <div className="flex flex-col">
               <div className="flex items-center gap-5">
-                {user?.is_premium ? (
-                  <AvatarPremium user={user} />
-                ) : (
-                  <Avatar
-                    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-                    // @ts-ignore
-
-                    name={user?.login ? user?.login : user?.email}
-                    size="50"
-                    email={user?.email}
-                    round
-                    src={import.meta.env.VITE_API_URL + "/" + user?.avatar_url}
-                    className={styles.avatar}
-                  />
-                )}
+                <AvatarPremium user={user} />
 
                 <div className="flex flex-col gap-1">
                   <div className="flex items-center gap-4">
@@ -67,11 +53,12 @@ export const Profile = () => {
           </div>
           <Link
             to={ROUTES.SETTINGS}
-            className="p-2 rounded-full hover:bg-brand hover:bg-opacity-10 hover:bg-opacity-35"
+            className="p-2 rounded-full hover:bg-brand hover:bg-opacity-15"
           >
-            <Settings2 className="stroke-blue-500" />
+            <Settings2 className="stroke-primary-800" />
           </Link>
         </div>
+        {user?.is_premium && <StatisticWidget />}
       </div>
     </div>
   );

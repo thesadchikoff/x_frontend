@@ -45,7 +45,7 @@ export const PremiumBadge = () => {
       <img
         src={import.meta.env.VITE_API_URL + "/" + user.status?.path}
         alt=""
-        className="cursor-pointer w-[30px] h-[30px] object-contain"
+        className="cursor-pointer w-[25px] h-[25px] object-contain"
         onClick={handleImgClick}
       />
       {isOpenContext && (

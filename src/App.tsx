@@ -11,6 +11,7 @@ import { PrivateLayout, PublicLayout } from "./layouts";
 import { RouterList } from "./router/router-list";
 import { ErrorScreen } from "./screens/error/ErrorScreen";
 import { ThemeProvider } from "./providers/ThemeProvider";
+import { useThemeContext } from "./hooks/useThemeContext";
 
 function App() {
   const [user, setUser] = useState<User | null>(null);
@@ -22,7 +23,7 @@ function App() {
     refetchOnMount: false,
     refetchOnReconnect: false,
   });
-
+  const { theme } = useThemeContext();
   useEffect(() => {
     if (isSuccess) {
       setUser(data);
@@ -37,8 +38,8 @@ function App() {
   return (
     <>
       <UserProvider user={user} setUser={setUser}>
-        <Toaster richColors />
         <ThemeProvider>
+          <Toaster />
           <BrowserRouter>
             <Routes>
               {RouterList.map((route) => {
