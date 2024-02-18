@@ -11,7 +11,7 @@ export const TwoFactorForm = () => {
     handleSubmit,
     formState: { isDirty, isValid, errors },
   } = useForm<{ tg_code: string }>({
-    mode: "all",
+    mode: "onChange",
   });
   const { mutate } = useActivateTwoFaMutation();
   const onSubmit = handleSubmit((data) => {

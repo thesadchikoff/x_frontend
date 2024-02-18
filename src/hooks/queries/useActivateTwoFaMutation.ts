@@ -12,5 +12,8 @@ export const useActivateTwoFaMutation = () => {
       toast.info(data.message);
       queryClient.invalidateQueries({ queryKey: [QUERYE_KEYS.GET_PROFILE] });
     },
+    onError(error) {
+      toast.error(error.response.data.message);
+    },
   });
 };
