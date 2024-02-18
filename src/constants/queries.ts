@@ -8,4 +8,7 @@ export const enum QUERYE_KEYS {
   GET_PACKS = "get-icon-pack",
   GET_ICONS = "get-icons",
   PATCH_ICON_FOR_USER = "patch-icon",
+  ACTIVATE_TWO_FA = "activate-two-factor",
+  DEACTIVATE_TWO_FA = "deactivate-two-factor",
+  SEND_CODE = "send-code",
 }

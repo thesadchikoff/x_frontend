@@ -30,6 +30,11 @@ export default {
       "home-texture": "url('/images/gem.png')",
     },
     extend: {
+      boxShadow: {
+        progressPositive: "0rem 0rem 0.63rem 0rem rgba(104, 255, 132, 0.39)",
+        progressNeutral: "0rem 0rem 0.63rem 0rem rgba(254, 155, 38, 0.54)",
+        progressHight: "0rem 0rem 0.63rem 0rem rgba(255, 32, 32, 0.46)",
+      },
       colors: {
         primary: {
           50: "#f9fafb",
@@ -52,6 +57,7 @@ export default {
           error: "#F64C4C",
           attention: "#FFB219",
           positive: "#40BF7F",
+          foreground: "#0E0E0E",
         },
       },
       textColor: {

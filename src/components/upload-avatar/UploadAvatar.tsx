@@ -74,19 +74,33 @@ export const UploadAvatar = () => {
         onChange={handleFileChange}
       />
       {previewUrl ? (
-        <div className="flex items-center gap-5">
-          <Avatar src={previewUrl} round className="object-cover" />
+        <div className="flex items-center gap-5 mobile:flex-col desktop:flex-row">
+          <Avatar
+            src={previewUrl}
+            round
+            className="object-cover w-[100rem] h-[100rem]"
+          />
           <div className="flex flex-col justify-between gap-5">
             <span
-              className={cn("p-3 border rounded-xl", {
-                "border-dark": theme === "dark",
-              })}
+              className={cn(
+                "py-[0.5rem] px-[1rem] border rounded-xl",
+                "mobile:text-xs",
+                "tablet:text-lg",
+                {
+                  "border-dark": theme === "dark",
+                }
+              )}
             >
               {fileName && fileName}
             </span>
-            <div className="flex items-center gap-3">
-              <Button title="Загрузить" onClick={loadAvatar} />
-              <Button title="Отмена" variant="ghost" onClick={cancelUpload} />
+            <div className="flex items-center justify-between w-full gap-3">
+              <Button fullWidth title="Загрузить" onClick={loadAvatar} />
+              <Button
+                fullWidth
+                title="Отмена"
+                variant="ghost"
+                onClick={cancelUpload}
+              />
             </div>
           </div>
         </div>

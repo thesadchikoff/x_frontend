@@ -5,6 +5,7 @@ type User = {
   avatar_url: string;
   is_premium: boolean;
   status?: Status;
+  two_factor?: boolan;
 };
 
 type Status = {
@@ -14,10 +15,11 @@ type Status = {
   path: string;
 };
 
-type AuthResponse = {
-  accessToken: string;
-  user: User;
-};
+type AuthResponse =
+  | {
+      accessToken: string;
+      user: User;
+    } & { message: string };
 
 type UpdateUserField = {
   login: string;

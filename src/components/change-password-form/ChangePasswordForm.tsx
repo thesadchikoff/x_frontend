@@ -60,9 +60,6 @@ const ChangePasswordForm = () => {
         title="Сменить пароль"
         disabled={isDirty && !isValid}
       />
-      <span className="text-xs !opacity-40 mobile:text-center desktop:text-right">
-        Ваш ID аккаунта: {user?.id}
-      </span>
     </form>
   );
 };

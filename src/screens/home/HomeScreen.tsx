@@ -4,11 +4,11 @@ import { cn } from "@/utils/helpers";
 const HomeScreen = () => {
   const { theme } = useThemeContext();
   return (
-    <div className="h-full py-10 ">
-      <div className="container flex flex-col gap-10">
+    <div className="h-full">
+      <div className="flex flex-col gap-10">
         <div
           className={cn(
-            "relative flex flex-col justify-center w-full gap-5 p-5 bg-white border rounded-xl",
+            "relative flex flex-col justify-center gap-5 p-5 bg-white border rounded-xl",
             {
               "bg-dark-foreground border-dark": theme === "dark",
             }

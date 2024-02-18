@@ -6,6 +6,7 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "xs" | "md" | "lg" | "xl";
   variant?: "primary" | "danger" | "ghost";
   icon?: React.ReactNode;
+  fullWidth?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -18,6 +19,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = "md",
       variant = "primary",
       icon,
+      fullWidth,
       ...props
     },
     ref
@@ -29,7 +31,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         type={type}
         disabled={disabled}
         className={cn(
-          "outline-none rounded-xl disabled:bg-opacity-10 text-invert disabled:text-opacity-20 flex items-center gap-3 justify-center",
+          "outline-none  rounded-xl disabled:bg-opacity-10 text-invert disabled:text-opacity-20 flex items-center gap-3 justify-center",
           {
             "bg-primary-700 hover:bg-primary-hover active:bg-primary-pressed":
               variant === "primary",
@@ -39,7 +41,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
               variant === "danger",
           },
           {
-            "bg-transparent hover:bg-brand hover:bg-opacity-10 active:bg-primary-200 text-brand disabled:bg-transparent":
+            "bg-transparent hover:bg-brand hover:bg-opacity-10 active:bg-primary-800 active:bg-opacity-30 text-brand disabled:bg-transparent":
               variant === "ghost",
           },
           {
@@ -53,6 +55,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           },
           {
             "px-3 py-4 text-lg": size === "xl",
+          },
+          {
+            "w-full": fullWidth,
           },
           className
         )}

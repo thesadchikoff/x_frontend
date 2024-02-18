@@ -27,7 +27,7 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={{ theme, toggleTheme }}>
-      <main className={`${theme}  flex flex-col w-full h-full`}>
+      <main className={`${theme}  flex flex-col w-full h-full overflow-hidden`}>
         {children}
       </main>
     </ThemeContext.Provider>

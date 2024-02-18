@@ -15,13 +15,21 @@ export const StatisticWidget = () => {
       )}
     >
       <h1 className="text-xl font-medium">Ваша статистика</h1>
-      <div className="grid grid-cols-5 gap-10">
-        <ProgresBar currentValue={1} totalValue={24} />
-        <ProgresBar currentValue={15} totalValue={24} />
-        <ProgresBar currentValue={5} totalValue={24} />
-        <ProgresBar currentValue={19} totalValue={24} />
-        <ProgresBar currentValue={11} totalValue={24} />
-        <ProgresBar currentValue={9} totalValue={24} />
+      <div
+        className={cn(
+          "grid gap-10",
+          "mobile:grid-cols-1",
+          "tablet:grid-cols-3",
+          "desktop:grid-cols-5"
+        )}
+      >
+        <ProgresBar title="Задач выполнено" currentValue={5} totalValue={24} />
+        <ProgresBar
+          title="Задач воркспейса"
+          currentValue={17}
+          totalValue={17}
+        />
+        <ProgresBar title="Тестовых задач" currentValue={12} totalValue={19} />
       </div>
     </div>
   );

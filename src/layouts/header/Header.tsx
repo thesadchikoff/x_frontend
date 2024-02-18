@@ -26,8 +26,8 @@ export const Header = () => {
         "border-b-dark": theme === "dark",
       })}
     >
-      <div className="container flex items-center justify-between h-full">
-        <Link to={ROUTES.HOME} className="flex items-center gap-1">
+      <div className="flex items-center justify-between h-full px-5 ">
+        <Link to={ROUTES.HOME} className="flex items-center gap-1 ">
           <span>Task Manager</span>
           {user?.is_premium && (
             <sup className={styles.premium_badge_sup}>Premium</sup>

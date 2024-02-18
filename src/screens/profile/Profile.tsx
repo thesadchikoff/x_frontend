@@ -16,12 +16,12 @@ export const Profile = () => {
 
   return (
     <div
-      className={cn("flex flex-1  w-full h-full", {
+      className={cn("flex flex-1 ", {
         "bg-dark": theme === "dark",
         "bg-primary-50": theme === "light",
       })}
     >
-      <div className="container flex flex-col gap-10">
+      <div className="flex flex-col w-full gap-10">
         <h1 className="text-xl font-medium">Ваш профиль</h1>
         <div
           className={cn(styles.profile_info, {
@@ -44,7 +44,7 @@ export const Profile = () => {
 
                   {user?.login && (
                     <span className="text-xs font-medium !opacity-50">
-                      {user!.login}
+                      @{user!.login}
                     </span>
                   )}
                 </div>
