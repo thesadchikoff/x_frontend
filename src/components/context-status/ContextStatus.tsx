@@ -1,137 +1,149 @@
-import { Loader2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
-import styles from "./ContextStatus.module.scss";
-import { useStatusPackQuery } from "@/hooks/queries/useStatusPackQuery";
-import { useIconsQuery } from "@/hooks/queries/useIconQuery";
-import { usePatchIcon } from "@/hooks/queries/usePatchIcon";
-import { useThemeContext } from "@/hooks/useThemeContext";
-import { cn } from "@/utils/helpers";
+import { useIconsQuery } from '@/hooks/queries/useIconQuery'
+import { usePatchIcon } from '@/hooks/queries/usePatchIcon'
+import { useStatusPackQuery } from '@/hooks/queries/useStatusPackQuery'
+import { useThemeContext } from '@/hooks/useThemeContext'
+import { cn } from '@/utils/helpers'
+import { Loader2 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import styles from './ContextStatus.module.scss'
 
 export const ContextStatus = () => {
-  const { theme } = useThemeContext();
-  const containerRef = useRef(null);
-  const { data, isLoading, isError, isSuccess } = useStatusPackQuery();
+	const { theme } = useThemeContext()
+	const containerRef = useRef(null)
+	const { data, isLoading, isError, isSuccess } = useStatusPackQuery()
 
-  const handleWheelScroll = (event: React.WheelEvent<HTMLDivElement>) => {
-    const container = containerRef.current;
-    const scrollAmount = 50;
-    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-    // @ts-expect-error
-    container.scrollLeft += event.deltaY > 0 ? scrollAmount : -scrollAmount;
-  };
+	const handleWheelScroll = (event: React.WheelEvent<HTMLDivElement>) => {
+		const container = containerRef.current
+		const scrollAmount = 50
+		// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+		// @ts-expect-error
+		container.scrollLeft += event.deltaY > 0 ? scrollAmount : -scrollAmount
+	}
 
-  const [activePackId, setActivePackId] = useState<string | null>(null);
+	const [activePackId, setActivePackId] = useState<string | null>(null)
+	console.log('data', data)
+	const GetContent = (params: { params: string }) => {
+		const { data, isError, isFetching, isSuccess, error } =
+			useIconsQuery(params)
+		const { mutate } = usePatchIcon()
+		if (isFetching) {
+			return (
+				<div className='flex items-center justify-center w-full h-full'>
+					<Loader2 className='animate-spin' />
+				</div>
+			)
+		}
+		if (isError) {
+			console.log(error)
+			return (
+				<div className='flex items-center justify-center w-full h-full'>
+					<span>Ошибка загрузки иконок [{error.message}]</span>
+				</div>
+			)
+		}
 
-  const GetContent = (params: { params: string }) => {
-    const { data, isError, isFetching, isSuccess, error } =
-      useIconsQuery(params);
-    const { mutate } = usePatchIcon();
-    if (isFetching) {
-      return (
-        <div className="flex items-center justify-center w-full h-full">
-          <Loader2 className="animate-spin" />
-        </div>
-      );
-    }
-    if (isError) {
-      console.log(error);
-      return (
-        <div className="flex items-center justify-center w-full h-full">
-          <span>Ошибка загрузки иконок [{error.message}]</span>
-        </div>
-      );
-    }
+		if (isSuccess && data?.length <= 0) {
+			return (
+				<div className='flex items-center justify-center w-full h-full  text-xs !opacity-70'>
+					<span>Иконки не найдены</span>
+				</div>
+			)
+		}
 
-    if (isSuccess && !data) {
-      return (
-        <div>
-          <span>Иконки не найдены</span>
-        </div>
-      );
-    }
+		if (isSuccess) {
+			return (
+				<>
+					{data.map(icon => {
+						return (
+							<img
+								onClick={() => mutate(icon.id)}
+								key={icon.id}
+								src={import.meta.env.VITE_API_URL + '/' + icon.path}
+								alt=''
+								className='cursor-pointer w-[40px] h-[40px] object-contain'
+							/>
+						)
+					})}
+				</>
+			)
+		}
+	}
 
-    if (isSuccess) {
-      return (
-        <>
-          {data.map((icon) => {
-            return (
-              <img
-                onClick={() => mutate(icon.id)}
-                key={icon.id}
-                src={import.meta.env.VITE_API_URL + "/" + icon.path}
-                alt=""
-                className="cursor-pointer w-[40px] h-[40px] object-contain"
-              />
-            );
-          })}
-        </>
-      );
-    }
-  };
-
-  const GetPack = () => {
-    if (isLoading) {
-      return (
-        <div className="flex items-center justify-center w-full">
-          <Loader2 className="animate-spin opacity-60" />
-        </div>
-      );
-    }
-    if (isError) {
-      return (
-        <span className="flex items-center justify-center w-full text-xs !opacity-50">
-          Ошибка загрузки набора
-        </span>
-      );
-    }
-    if (isSuccess) {
-      return (
-        <div className="box-border flex items-center gap-3 px-5">
-          {data.map((pack) => {
-            return (
-              <img
-                onClick={() => {
-                  setActivePackId(pack.id);
-                }}
-                key={pack.id}
-                className="w-[30px] h-[30px] object-contain cursor-pointer"
-                src={import.meta.env.VITE_API_URL + "/" + pack.preview}
-                alt={pack.name}
-                title={pack.name}
-              />
-            );
-          })}
-        </div>
-      );
-    }
-  };
-  useEffect(() => {
-    if (isSuccess) {
-      setActivePackId(data[0].id);
-    }
-  }, [isSuccess, data]);
-  return (
-    <div
-      className={cn(styles.status_context_menu, {
-        "bg-dark-foreground border-dark": theme === "dark",
-      })}
-      onWheel={handleWheelScroll}
-    >
-      {/* <header className={styles.header}>
+	const GetPack = () => {
+		if (isLoading) {
+			return (
+				<div className='flex items-center justify-center w-full'>
+					<Loader2 className='animate-spin opacity-60' />
+				</div>
+			)
+		}
+		if (isError) {
+			return (
+				<span className='flex items-center justify-center w-full text-xs !opacity-50'>
+					Ошибка загрузки набора
+				</span>
+			)
+		}
+		if (isSuccess && data.length <= 0) {
+			return (
+				<div className='flex items-center justify-center w-full text-xs !opacity-70'>
+					<span>Наборы не найдены</span>
+				</div>
+			)
+		}
+		if (isSuccess) {
+			return (
+				<div className='box-border flex items-center gap-3 px-5'>
+					{data.map(pack => {
+						return (
+							<img
+								onClick={() => {
+									setActivePackId(pack.id)
+								}}
+								key={pack.id}
+								className='w-[30px] h-[30px] object-contain cursor-pointer'
+								src={import.meta.env.VITE_API_URL + '/' + pack.preview}
+								alt={pack.name}
+								title={pack.name}
+							/>
+						)
+					})}
+				</div>
+			)
+		}
+	}
+	useEffect(() => {
+		if (isSuccess) {
+			setActivePackId(data[0]?.id)
+		}
+	}, [isSuccess, data])
+	return (
+		<div
+			className={cn(styles.status_context_menu, {
+				'bg-dark-foreground border-dark': theme === 'dark',
+			})}
+			onWheel={handleWheelScroll}
+		>
+			{/* <header className={styles.header}>
 				<span className={styles.title}>Выберите статус</span>
 			</header> */}
-      <div className={styles.body} key={24}>
-        <GetContent params={activePackId} />
-      </div>
-      <div
-        onWheel={handleWheelScroll}
-        className={cn(styles.footer, {
-          "border-dark": theme === "dark",
-        })}
-        ref={containerRef}
-      >
-        <GetPack />
-      </div>
-    </div>
-  );
-};
+			<div
+				className={cn(styles.body, 'grid grid-cols-7', {
+					'grid-cols-1': data?.length <= 0,
+				})}
+				key={24}
+			>
+				<GetContent params={activePackId} />
+			</div>
+			<div
+				onWheel={handleWheelScroll}
+				className={cn(styles.footer, {
+					'border-dark': theme === 'dark',
+				})}
+				ref={containerRef}
+			>
+				<GetPack />
+			</div>
+		</div>
+	)
+}

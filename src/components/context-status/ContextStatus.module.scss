@@ -1,47 +1,47 @@
 .status_context_menu {
-  @apply absolute  border shadow bg-indicator-white rounded-xl top-8 
+	@apply absolute  border shadow bg-indicator-white rounded-xl top-8 
   overflow-hidden flex flex-col  gap-3 py-3;
-  width: 20rem;
-  height: 300px;
-  .header {
-    @apply px-4;
-    .title {
-      @apply text-xs;
-      opacity: 0.7 !important;
-    }
-  }
-  .body {
-    @apply flex-1 overflow-y-auto grid grid-cols-7 gap-4 px-4;
-    &::-webkit-scrollbar {
-      width: 10px; /* ширина scrollbar */
-    }
-    &::-webkit-scrollbar-track {
-      background: transparent; /* цвет дорожки */
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(197, 197, 197, 0.377); /* цвет плашки */
-      border-radius: 20px; /* закругления плашки */
-      border: 3px solid white; /* padding вокруг плашки */
-    }
-  }
-  .footer {
-    @apply border-t pt-2;
-    max-width: 20rem;
-    display: flex;
-    gap: 10px;
-    overflow: auto;
-    white-space: nowrap;
-    scroll-behavior: smooth;
-    &::-webkit-scrollbar {
-      width: 5px; /* ширина scrollbar */
-    }
-    &::-webkit-scrollbar-track {
-      background: transparent; /* цвет дорожки */
-    }
-    &::-webkit-scrollbar-thumb {
-      background-color: rgba(197, 197, 197, 0.377); /* цвет плашки */
-      border-radius: 20px; /* закругления плашки */
-      border: 6px solid white; /* padding вокруг плашки */
-    }
-  }
+	width: 20rem;
+	height: 300px;
+	.header {
+		@apply px-4;
+		.title {
+			@apply text-xs;
+			opacity: 0.7 !important;
+		}
+	}
+	.body {
+		@apply flex-1 overflow-y-auto  gap-4 px-4;
+		&::-webkit-scrollbar {
+			width: 10px; /* ширина scrollbar */
+		}
+		&::-webkit-scrollbar-track {
+			background: transparent; /* цвет дорожки */
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(197, 197, 197, 0.377); /* цвет плашки */
+			border-radius: 20px; /* закругления плашки */
+			border: 3px solid white; /* padding вокруг плашки */
+		}
+	}
+	.footer {
+		@apply border-t pt-2;
+		max-width: 20rem;
+		display: flex;
+		gap: 10px;
+		overflow: auto;
+		white-space: nowrap;
+		scroll-behavior: smooth;
+		&::-webkit-scrollbar {
+			width: 5px; /* ширина scrollbar */
+		}
+		&::-webkit-scrollbar-track {
+			background: transparent; /* цвет дорожки */
+		}
+		&::-webkit-scrollbar-thumb {
+			background-color: rgba(197, 197, 197, 0.377); /* цвет плашки */
+			border-radius: 20px; /* закругления плашки */
+			border: 6px solid white; /* padding вокруг плашки */
+		}
+	}
 }
