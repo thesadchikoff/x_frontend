@@ -1,9 +1,10 @@
 export const enum ROUTES {
-  HOME = "/",
-  PROFILE = "/profile",
-  SETTINGS = "/settings",
-  COMMUNITY = "/community",
+	HOME = '/',
+	PROFILE = '/profile',
+	SETTINGS = '/settings',
+	COMMUNITY = '/community',
+	COMMUNITY_PROFILE = '/community/:id',
 
-  REGISTER = "/register",
-  LOGIN = "/login",
+	REGISTER = '/register',
+	LOGIN = '/login',
 }

@@ -1,95 +1,94 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
+.light {
+	background-color: white;
+}
+.dark {
+	background-color: black !important;
+}
 * {
-  font-family: "Inter", sans-serif;
-  animation: view 0.3s forwards;
+	font-family: 'Inter', sans-serif;
+	animation: view 0.3s forwards;
 
-  .dark {
-    color: lavender;
-  }
-  .light {
-    color: black;
-  }
+	.dark {
+		color: lavender;
+	}
+	.light {
+		color: black;
+	}
 }
 
 html {
-  width: 100%;
-  height: 100vh;
-  .dark {
-    background-color: black;
-  }
-  .light {
-    background-color: white;
-  }
+	width: 100%;
+	height: 100vh;
+	.dark {
+		background-color: black;
+	}
+	.light {
+		background-color: white;
+	}
 }
 body {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  .light {
-    background-color: white;
-  }
-  .dark {
-    background-color: black;
-  }
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	width: 100%;
+	height: 100%;
 }
 
 #root {
-  width: 100%;
-  height: 100%;
-  .dark {
-    background-color: black;
-  }
+	width: 100%;
+	height: 100%;
+	.dark {
+		background-color: black;
+	}
 }
 
 .swiper-button-prev {
-  @apply p-2 bg-indicator-white rounded-full shadow;
-  width: 40px !important;
-  height: 40px !important;
-  &::after {
-    content: "<" !important;
-    font-family: "Inter", sans-serif !important;
-    font-size: 26px !important;
-  }
+	@apply p-2 bg-indicator-white rounded-full shadow;
+	width: 40px !important;
+	height: 40px !important;
+	&::after {
+		content: '<' !important;
+		font-family: 'Inter', sans-serif !important;
+		font-size: 26px !important;
+	}
 }
 
 .swiper-button-next {
-  @apply p-2 bg-indicator-white rounded-full shadow;
-  width: 40px !important;
-  height: 40px !important;
-  &::after {
-    content: ">" !important;
-    font-family: "Inter", sans-serif !important;
-    font-size: 26px !important;
-  }
+	@apply p-2 bg-indicator-white rounded-full shadow;
+	width: 40px !important;
+	height: 40px !important;
+	&::after {
+		content: '>' !important;
+		font-family: 'Inter', sans-serif !important;
+		font-size: 26px !important;
+	}
 }
 
 @keyframes view {
-  0% {
-    opacity: 0;
-  }
+	0% {
+		opacity: 0;
+	}
 
-  100% {
-    opacity: 1;
-  }
+	100% {
+		opacity: 1;
+	}
 }
 
 #root
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div
-  > div.object-cover.sb-avatar.sb-avatar--text
-  > div
-  > div
-  > span
-  > span {
-  font-family: "Inter", sans-serif !important;
+	> div
+	> div
+	> div
+	> div
+	> div
+	> div
+	> div
+	> div.object-cover.sb-avatar.sb-avatar--text
+	> div
+	> div
+	> span
+	> span {
+	font-family: 'Inter', sans-serif !important;
 }
