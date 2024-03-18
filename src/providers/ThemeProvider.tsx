@@ -12,9 +12,9 @@ export const ThemeContext = React.createContext<ThemeContextType>({
 
 export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
 	const storedTheme = localStorage.getItem('theme')
-	const cuurentTheme = storedTheme ? (storedTheme as 'dark' | 'light') : 'dark'
+	const curentTheme = storedTheme ? (storedTheme as 'dark' | 'light') : 'dark'
 
-	const [theme, setTheme] = useState(cuurentTheme)
+	const [theme, setTheme] = useState(curentTheme)
 	useEffect(() => {
 		const html = document.querySelector('#main')
 		if (theme === 'dark') {

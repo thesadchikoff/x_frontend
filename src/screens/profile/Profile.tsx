@@ -76,7 +76,11 @@ export const Profile = () => {
 						>
 							<div className='flex items-center gap-3'>
 								<img
-									src='https://images.unsplash.com/photo-1707343843344-011332037abb?q=80&w=3270&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D'
+									src={
+										import.meta.env.VITE_API_URL +
+										'/' +
+										user.community.avatar_url
+									}
 									alt=''
 									className='rounded-full w-[58px] h-[58px] object-cover'
 								/>

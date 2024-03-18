@@ -1,6 +1,7 @@
 .status_context_menu {
 	@apply absolute  border shadow bg-indicator-white rounded-xl top-8 overflow-hidden flex flex-col  gap-3 py-3  z-50;
 	-webkit-transform: translate3d(0, 0, 200px);
+	transform: translate3d(0, 0, 200px);
 
 	position: absolute;
 	z-index: 1000;
